@@ -3,11 +3,12 @@ import c4dynamics as c4d
 import numpy as np 
 from scipy.integrate import solve_ivp
 
-dt = 0.01       
-t_end = 5.0
-L = 1.0
-g = 9.8
-theta_init = 0
+# simulation parameters
+dt = 0.01   # s    
+t_end = 5.0 # s
+L = 1.0 # m
+g = 9.8 # m/s^2
+theta_init = 50 # deg
 
 def pendulum_model(t, y, L, g):
     theta, q = y
