@@ -40,15 +40,15 @@ Define simulation parameters: dt, t_end
 Define controller parameters: N, Q, R
 Define constraints: delta_max
 
-Define vehicle model function: vehicle_model(t,x,δ)
-Define MPC function:
+Define vehicle model function: vehicle_model()
+Define MPC function: A & B matrices, solver, etc
 
 Initialize vehicle state object: y0, ψ0
 
 Main loop:
     Store current state: vehicle.store
     Compute optimal steering using MPC:
-    Apply control input to vehicle: vehicle.X = solve_ivp
+    Apply control input to vehicle: vehicle.X = solve_ivp or discrete model
     Update vehicle state:
         
 Plot: lateral position (y), heading (ψ) and control input (δ)
