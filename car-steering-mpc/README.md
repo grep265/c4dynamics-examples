@@ -10,15 +10,19 @@ The goal is to control the lateral position **(y)** and heading angle **(ψ)** o
 
 We consider a simplified kinematic model of a vehicle with 2 states `[y ; ψ]`:
 
-`\[\dot{y} = V * \psi\]`
+\[
+\dot{y} = V \psi
+\]
 
-`\[\dot{\psi} = \delta\]`
+\[
+\dot{\psi} = \delta
+\]
   
 where:  
-- `\(y)` = lateral position [m]  
-- `\(\psi\)` = heading angle [rad]  
-- `\(V\)` = velocity [m/s]  
-- `\(\delta\)` = steering input [rad/s]  
+- `y` = lateral position [m]  
+- `ψ` = heading angle [rad]  
+- `V` = velocity [m/s]  
+- `δ` = steering input [rad/s]  
 
 ---
 
@@ -28,15 +32,15 @@ where:
 Import required libraries: c4dynamics, numpy, matplotlib, etc
 
 Define model parameters: V
-Define initial states: y0, psi0
+Define initial states: y0, ψ0
 Define simulation parameters: dt, t_end
 Define controller parameters: N, Q, R
 Define constraints: delta_max
 
-Define vehicle model function: vehicle_model(t,x,delta)
+Define vehicle model function: vehicle_model(t,x,δ)
 Define MPC function:
 
-Initialize vehicle state object: y0, psi0
+Initialize vehicle state object: y0, ψ0
 
 Main loop:
     Store current state: vehicle.store
@@ -44,7 +48,7 @@ Main loop:
     Apply control input to vehicle: vehicle.X = solve_ivp
     Update vehicle state:
         
-Plot: lateral position (y), heading (psi) and control input (delta)
+Plot: lateral position (y), heading (ψ) and control input (δ)
 ```
 ---
 
