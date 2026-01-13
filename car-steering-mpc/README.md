@@ -1,4 +1,4 @@
-# Lateral MPC with c4dynamics
+# Vehicle steering control using MPC
 
 This project implements a Model Predictive Controller (MPC) for the steering control of a vehicle using the [c4dynamics](https://github.com/c4dynamics/c4dynamics) library.
 
