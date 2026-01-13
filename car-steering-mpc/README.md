@@ -8,17 +8,24 @@ The goal is to control the lateral position **(y)** and heading angle **(ψ)** o
 
 ## System Model
 
-We consider a simplified kinematic model of a vehicle with 2 states `[y ; ψ]`:
-
-$\dot{y}(t) = V(t) \psi$(t)
+We consider a simplified kinematic model of a vehicle with 2 states `[ψ ; y]`:
 
 $\dot{\psi}(t) = \delta$(t)
+
+$\dot{y}(t) = V\psi$(t)
   
 where:  
 - `y` = lateral position [m]  
 - `ψ` = heading angle [rad]  
 - `V` = velocity [m/s]  
 - `δ` = steering input [rad/s]  
+
+Discretize model
+
+$\psi(t+1) = \psi(t) + \delta(t)dt$ 
+
+$y(t+1) = y(t) + \psi(t) Vdt + \delta(t)0.5Vdt^2$
+
 
 ---
 
