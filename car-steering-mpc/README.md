@@ -10,13 +10,9 @@ The goal is to control the lateral position **(y)** and heading angle **(ψ)** o
 
 We consider a simplified kinematic model of a vehicle with 2 states `[y ; ψ]`:
 
-\[
-\dot{y} = V \psi
-\]
+$\dot{y}(t) = V(t) \psi$(t)
 
-\[
-\dot{\psi} = \delta
-\]
+$\dot{\psi}(t) = \delta$(t)
   
 where:  
 - `y` = lateral position [m]  
