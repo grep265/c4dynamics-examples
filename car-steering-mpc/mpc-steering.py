@@ -13,13 +13,17 @@ y0 = 1 # m
 
 # Simulation parameters
 dt = 0.1 # s
-t_end = 5.0 # s
+t_end = 8 # s
 
 # Controller parameters
 N = 5 # horizons
-Q = np.diag([1.0, 10.0]) # [psi, y]
-R = np.array([[0.1]])
-u_max = 0.5 # rad/s
+Q = np.diag([50, 50.0]) # [psi, y]
+R = np.array([[15.0]]) # [delta]
+u_max = 0.2 # rad/s
+
+# Plotting input
+delta_hist = []
+time_hist = []
 
 # states: [psi, y]
 def vehicle_model(t, x, delta, V=V):
@@ -64,10 +68,18 @@ for ti in np.arange(0, t_end, dt):
     sol = solve_ivp(vehicle_model, [ti, ti + dt], vehicle.X, args=(delta,))
     vehicle.X = sol.y[:, -1]
     vehicle.store(ti)
+    delta_hist.append(delta)
+    time_hist.append(ti)
 
 # Plots
 vehicle.plot('y', darkmode=False)
 plt.title('Lateral Position')
 vehicle.plot('psi', darkmode=False)
 plt.title('Heading Angle')
+plt.figure(3)
+plt.step(time_hist, delta_hist, where='post')
+plt.xlabel('Time [s]')
+plt.ylabel('Steering input δ [rad/s]')
+plt.title('MPC Steering Input')
+plt.grid(True)
 plt.show()
