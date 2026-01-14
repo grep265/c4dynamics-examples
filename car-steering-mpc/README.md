@@ -53,10 +53,9 @@ The vehicle steering is controlled using a Model Predictive Controller. The MPC 
    
    is discretized with timestep `dt = 0.1 s`:
 
-   $\begin{aligned}
-   \psi_{k+1} &= \psi_k + \delta_k \, dt \\
-   y_{k+1} &= y_k + V \psi_k \, dt + 0.5 V \, dt^2 \, \delta_k
-   \end{aligned}$
+   $\psi_{k+1} = \psi_k + \delta_k \ dt$
+
+   $y_{k+1} = y_k + V \psi_k \ dt + 0.5 V \ dt^2 \ \delta_k$
 
 ### Implementation Details
 
