@@ -55,6 +55,24 @@ Plot: lateral position (y), heading (ψ) and control input (δ)
 ```
 ---
 
+## Results
+
+- Lateral position (`y`) is driven from the initial offset (`y0 = 1.0 m`) toward zero; the controller reduces the lateral error within a few seconds and stabilizes near the reference.
+
+![](images/lateral_position.png)
+
+- Heading angle (`psi`) shows a transient response as the controller rotates the vehicle to correct lateral error, then converges toward small values once `y` is near zero.
+
+![](images/heading_angle.png)
+
+- Steering input (`δ`) exhibits an initial corrective action (bounded by `u_max`) and then settles close to zero as the vehicle reaches the desired lateral position.
+
+![](images/mpc_steering_input.png)
+
+These results indicate the MPC successfully commands the steering rate to remove the initial lateral offset while respecting the input bound.
+
+---
+
 ## References
 
 [MPC - Standford lecture](https://web.stanford.edu/class/archive/ee/ee392m/ee392m.1056/Lecture14_MPC.pdf)
