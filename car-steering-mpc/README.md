@@ -20,12 +20,52 @@ where:
 - `V` = velocity [m/s]  
 - `δ` = steering input [rad/s]  
 
-Discretize model
+---
 
-$\psi(t+1) = \psi(t) + \delta(t)dt$ 
+## Model Predictive Controller (MPC)
 
-$y(t+1) = y(t) + \psi(t) Vdt + \delta(t)0.5Vdt^2$
+The vehicle steering is controlled using a Model Predictive Controller. The MPC computes the optimal steering input `δ` over a finite prediction horizon to regulate both the lateral position `y` and heading angle `ψ` of the vehicle.
 
+### MPC Design
+
+1. **Prediction Horizon:**  
+   The controller looks ahead `N` steps to predict future vehicle states.
+
+2. **Cost Function:**  
+   The MPC minimizes a quadratic cost function combining state deviations and control effort:
+
+   $J = \sum_{k=0}^{N-1} \left( x_k^\top Q x_k + u_k^\top R u_k \right) + x_N^\top Q x_N$
+   
+   where:  
+   - $x_k = [\psi_k, y_k]^\top$ is the state vector at step $k$  
+   - $u_k = \delta_k$ is the steering input  
+   - $Q$ penalizes heading and lateral deviation  
+   - $R$ penalizes control effort  
+
+3. **Constraints:**  
+   - Steering input is bounded: $|\delta| \le 0.2 \text{ rad/s}$ 
+
+4. **Discrete Vehicle Model:**  
+
+   The continuous-time kinematic model:
+
+   $\dot{\psi}(t) = \delta(t), \quad \dot{y}(t) = V \psi(t)$
+   
+   is discretized with timestep `dt = 0.1 s`:
+
+   $\begin{aligned}
+   \psi_{k+1} &= \psi_k + \delta_k \, dt \\
+   y_{k+1} &= y_k + V \psi_k \, dt + 0.5 V \, dt^2 \, \delta_k
+   \end{aligned}$
+
+### Implementation Details
+
+- The MPC problem is formulated and solved using **CVXPY** with the **OSQP** solver.
+- At each simulation step:
+  1. The current state is measured.
+  2. The MPC computes the optimal steering input for the next timestep.
+  3. The input is applied to the vehicle using `solve_ivp` to integrate the dynamics.
+  4. The state is stored for plotting and analysis.
 
 ---
 
